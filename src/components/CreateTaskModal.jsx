@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import '../css/C_tareas.css';
 
 
@@ -49,7 +49,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
     }
   };
 //llenar select con usuarios
-  const fetchUsuarios = async () => {
+  const fetchUsuarios = useCallback(async () => {
     
     try {
         const response = await fetch('https://personaltaskphp.up.railway.app/api/usuarios', {
@@ -70,13 +70,13 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
         setError('Error al obtener usuarios:', error);
         throw error;
       }
-  }
+  },[]);
 
   useEffect(() => {
     if(rol==="admin"){
         fetchUsuarios();
       }
-  }, [tarea]);
+  }, [tarea,fetchUsuarios,rol]);
 
   return (
     <div className="modalOverlay" onClick={onClose}>
@@ -124,6 +124,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
             type="checkbox"
             checked={editTarea.completada}
             onChange={(e) => setEditTarea({ ...editTarea, completada: e.target.checked })}
+            disabled
         />{' '}
         Completada
         </label>
@@ -147,6 +148,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
         </button>
     </div>
     {Err && <p className="error-message">{Err}</p>}
+    {error && <p className="error-message">{error}</p>}
     </div>
     </div>
   );

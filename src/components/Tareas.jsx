@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import TareaModal from '../components/TareaModal.jsx';
 import { useAuth } from '../Context/authContext.js';
 
@@ -15,7 +15,7 @@ function TareasNotas( { tipo, recarga }) {
   const [verTodas, setVerTodas] = useState(false);
   const [tareasFiltradas, setTareasFiltradas] = useState([]);
 
-  const fetchTareas = async () => {
+  const fetchTareas = useCallback( async () => {
     setError('');
     setLoading(true);
     try {
@@ -38,11 +38,11 @@ function TareasNotas( { tipo, recarga }) {
     } finally {
       setLoading(false);
     }
-  };
+  },[user.id, user.rol, tipo]);
   //recargar tareas
   useEffect(() => {
       fetchTareas();
-    }, [recarga]);
+    }, [recarga, fetchTareas]);
     
     //fitlrar
     useEffect(() => {

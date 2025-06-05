@@ -47,7 +47,7 @@ function Main() {
       completada: 0,
       fecha_final: "",
     });
-  },[selectedView]);
+  },[selectedView,user.id]);
 
   return (
     <div className="layout">

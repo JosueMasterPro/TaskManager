@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import TareaModal from '../components/TareaModal.jsx';
 import { useAuth } from '../Context/authContext.js';
 
@@ -12,10 +12,9 @@ function Recordatorio( { tipo, recarga }) {
   const { user } = useAuth()
 
   //variable filtrar para admins
-  const [verTodas, setVerTodas] = useState(false);
   const [RecordatorioFiltrado, setRecordatorioFiltrado] = useState([]);
 
-  const fetchTareas = async () => {
+  const fetchTareas = useCallback(async () => {
     setError('');
     setLoading(true);
     try {
@@ -38,16 +37,16 @@ function Recordatorio( { tipo, recarga }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user.id, user.rol, tipo]);
   
   useEffect(() => {
     fetchTareas();
-  }, [recarga]);
+  }, [recarga,fetchTareas]);
 
    //fitlrar para los admins
     useEffect(() => {
         setRecordatorioFiltrado(tareas.filter(t => t.id_usuario === user.id));
-  }, [tareas, user.id, verTodas]);
+  }, [tareas, user.id]);
 
 
   const abrirModal = (tarea) => {
