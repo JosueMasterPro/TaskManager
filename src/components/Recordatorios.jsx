@@ -59,7 +59,7 @@ function Recordatorio( { tipo, recarga }) {
 
   return (
     <div style={{ padding: '1rem' }}>
-        <h2 className=''>Mis Recordatorios</h2> 
+        <h2 style={{ textAlign: 'center' }}>Mis Recordatorios</h2> 
 
       {loading && <p>Cargando Recordatorios...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
