@@ -1,0 +1,280 @@
+/* Fondo general */
+/* Contenedor padre centrado y con max ancho */
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100dvw;
+}
+@media (max-width: 460px) {
+  .login-page{
+    display: block;
+    min-height: 100dvh;
+    padding: 20px;
+    max-width: 100dvw;
+  }
+}
+
+/* Contenedor del formulario: ancho limitado y centrado */
+.Contenedor {
+  width: 100%;
+  max-width: 500px; /* máximo ancho fijo */
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  border: 2px solid red;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+
+/* Formularios */
+.forms-container {
+  position: relative;
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  animation: fadeIn 0.4s ease;
+}
+
+.login-page .login-form {
+  display: flex;
+}
+
+.login-page.signup-mode .login-form {
+  display: none;
+}
+
+.login-page.signup-mode .signup-form {
+  display: flex;
+}
+
+.form h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Grupo input con etiqueta flotante */
+.input-group {
+  position: relative;
+  margin-top: 10px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 12px 12px 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  padding: 0 5px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+/* Cuando sube el texto del label */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group input:valid + label {
+  top: 0;
+  transform: translateY(-50%) scale(1.1); /* se hace un poco más grande */
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* Botones */
+.btn {
+  padding: 12px;
+  border-radius: 25px;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #5563c1;
+}
+
+/* Botón de cambiar de login/signup */
+.toggle-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn.switch {
+  background: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+}
+
+.btn.switch:hover {
+  background-color: #667eea;
+  color: white;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .form h2 {
+    font-size: 20px;
+  }
+}
+
+/*Estilo de los grupos de los inputs*/
+.input-group {
+  position: relative;
+  margin-top: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 12px 14px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  padding: 0 5px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+/* cuando el input está enfocado o tiene contenido */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group input:valid + label {
+  top: 0;
+  transform: translateY(-50%) scale(1.2);
+  color: #667eea;
+}
+/*btn submit*/
+
+/* botones */
+.btn-submit {
+  padding: 14px 28px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.5);
+  transition: all 0.3s ease;
+  letter-spacing: 0.03em;
+  user-select: none;
+  outline-offset: 4px;
+  outline-color: #8a95f5;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #5563c1, #5a3f8f);
+  box-shadow: 0 8px 20px rgba(85, 99, 193, 0.7);
+  transform: translateY(-3px);
+}
+
+.btn-submit:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(85, 99, 193, 0.6);
+}
+/*btn ver contraseña*/
+.input-group.password-group {
+  position: relative;
+}
+
+.input-group.password-group input {
+  padding-right: 40px; /* espacio para el botón */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #667eea;
+  outline: none;
+  user-select: none;
+  padding: 0;
+}
+
+.toggle-password:hover {
+  color: #5563c1;
+}
+/*input de error*/
+.error-message {
+  color: #ff4d4f;        /* rojo fuerte */
+  background-color: #fff1f0;  /* fondo suave rosado */
+  border: 1px solid #ffa39e;  /* borde rojo claro */
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Animación opcional para que aparezca suave */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.toggle-container .text p {
+  color: #000; /* Negro sólido */
+  font-weight: 500; /* Grosor de texto opcional */
+}

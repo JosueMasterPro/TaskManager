@@ -1,0 +1,30 @@
+.loadContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100dvh;
+    background-color: black;
+}
+
+.text{
+    color: white;
+    font-family: sans-serif;
+}
+
+.ring{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    --color: #00ffff;
+    border-bottom: 8px solid var(--color);
+    animation: rotate1 1s linear infinite;
+}
+
+@keyframes rotate1{
+    to{
+        transform: rotateX(0deg) rotateZ(360deg);
+    }
+}
