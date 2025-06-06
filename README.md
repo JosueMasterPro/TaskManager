@@ -31,3 +31,5 @@ npm run dev o npm start
 npm run build
 se generara una carpeta build, esa la puedes subir al host de tu preferencia
 si el host permite enlace con github. sigue los pasos del host para subir el host.
+
+## NO olvides cambiar las URLS de cada uno del fetch, por los urls del host
