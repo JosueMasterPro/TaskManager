@@ -20,6 +20,18 @@
   transition: transform 0.15s ease;
 }
 
+/* Fondo rojo para tareas que vencen hoy o ya vencieron */
+.card.rojo {
+  background-color: #ffcccc;  /* rojo claro */
+  border: 1px solid #ff4d4d;
+}
+
+/* Fondo amarillo para tareas que vencen en 1 a 3 días */
+.card.amarillo {
+  background-color: #fff5cc;  /* amarillo claro */
+  border: 1px solid #ffcc00;
+}
+
 .modalOverlay {
   position: fixed;
   inset: 0;

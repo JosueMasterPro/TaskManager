@@ -4,8 +4,9 @@ import { MdDelete } from 'react-icons/md';
 import '../css/ModalEditarUser.css';
 
 const ModalEditUser = ({ usuario, onClose, onSave }) => {
-    const [editTarea, setEditTarea] = useState({ ...usuario });
+    const [editUser, seteditUser] = useState({ ...usuario });
     const [showConfirm, setShowConfirm] = useState(false);
+    const [err, seterr] = useState(false);
 
     const handleGuardar = async (e) => {
         e.preventDefault();
@@ -15,7 +16,7 @@ const ModalEditUser = ({ usuario, onClose, onSave }) => {
             {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(editTarea)
+            body: JSON.stringify(editUser)
             }
         );
 
@@ -26,22 +27,32 @@ const ModalEditUser = ({ usuario, onClose, onSave }) => {
         }
     };
 
-    const handleEliminar = async () => {
-        /*try {
-        const res = await fetch(
-            `https://personaltaskphp.up.railway.app/api/tareas/delete/${editTarea.id_Tarea}`,
-            {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
-            }
-        );
+    const handleEliminar = async (e) => {
+      e.preventDefault();
+      if(editUser.activo === 0){
+        seterr("Usuario ya esta desactivado");
+        setShowConfirm(false);
+      }
+      else{
+        try {
+          const res = await fetch(
+              `https://personaltaskphp.up.railway.app/api/edit/usuarios`,
+              {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({id: editUser.id})
+              }
+          );
 
-        if (!res.ok) throw new Error('Error al eliminar la tarea');
-        onSave(); // Cierra modal y refresca lista
-        } catch (err) {
-        alert(err.message);
-        }*/
+          if (!res.ok) throw new Error(DataTransfer.message || 'Error al guardar');
+          onSave();
+          } catch (err) {
+            seterr(err.message);
+          }
+      }
     };
+      
+
   return (
     <div className="modalOverlay">
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
@@ -53,26 +64,41 @@ const ModalEditUser = ({ usuario, onClose, onSave }) => {
         <h3>Editar Usuario</h3>
         <form onSubmit={handleGuardar} className="modal-form">
           <label>Usuario</label>
-          <input name="usuario" value={editTarea.usuario} onChange={(e) => setEditTarea({ ...editTarea, titulo: e.target.value })} disabled/>
+          <input name="usuario" value={editUser.usuario} onChange={(e) => seteditUser({ ...editUser, titulo: e.target.value })} disabled/>
 
           <label>Nombre</label>
-          <input name="nombre" value={editTarea.nombre} onChange={(e) => setEditTarea({ ...editTarea, nombre: e.target.value })} required />
+          <input name="nombre" value={editUser.nombre} onChange={(e) => seteditUser({ ...editUser, nombre: e.target.value })} required />
 
           <label>Apellido</label>
-          <input name="apellido" value={editTarea.apellido} onChange={(e) => setEditTarea({ ...editTarea, apellido: e.target.value })} required />
+          <input name="apellido" value={editUser.apellido} onChange={(e) => seteditUser({ ...editUser, apellido: e.target.value })} required />
 
           <label>Email</label>
-          <input type="email" name="email" value={editTarea.email} onChange={(e) => setEditTarea({ ...editTarea, email: e.target.value })} required />
+          <input type="email" name="email" value={editUser.email} onChange={(e) => seteditUser({ ...editUser, email: e.target.value })} required />
             <label>Roles</label>
             <select
-                value={editTarea.rol}
-                onChange={(e) => setEditTarea({ ...editTarea, rol: e.target.value })}
+                value={editUser.rol}
+                onChange={(e) => seteditUser({ ...editUser, rol: e.target.value })}
                 className="filtro-select estilizado"
                 >
-                <option value="">Todos los roles</option>
+                <option value="">Escoger rol</option>
                 <option value="admin">Admin</option>
                 <option value="employee">Employee</option>
             </select>
+            {usuario.activo?
+              <></>
+              :
+              <div className='div-check'>
+                <label className='label-div-check'>
+                  <input
+                    type="checkbox"
+                    checked={editUser.activo}
+                    onChange={(e) => seteditUser({ ...editUser, activo: e.target.checked })}
+                  />{' '} Activar
+                </label>
+              </div> 
+            }
+            
+            {err && <p className="error-message">{err}</p>}
           <div className="modal-buttons">
             <button type="submit">Guardar</button>
             <button type="button" className="cancel" onClick={onClose}>Cancelar</button>

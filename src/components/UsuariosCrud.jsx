@@ -115,7 +115,7 @@ function UsuarioCrud( {recarga}) {
         </thead>
         <tbody>
           {usuariosFiltrados.map((u) => (
-             <tr key={u.id}>
+             <tr key={u.id} className={u.activo === 1 ? "Verde" : "Rojo"}>
               <td data-label="ID">{u.id}</td>
               <td data-label="Usuario">{u.usuario}</td>
               <td data-label="Nombre">{u.nombre}</td>

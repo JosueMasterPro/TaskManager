@@ -169,3 +169,26 @@
     right: 0.5rem;
   }
 }
+
+
+.div-check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.label-div-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.label-div-check input[type="checkbox"] {
+  transform: translateY(5px);
+}

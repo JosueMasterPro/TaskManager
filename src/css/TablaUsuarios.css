@@ -167,3 +167,11 @@
   cursor: pointer;
 }
 
+.Verde {
+  background-color: #e7f9e9; /* verde claro */
+}
+
+.Rojo {
+  background-color: #ffe6e6;
+  border-left: 4px solid #ff4d4d;
+}

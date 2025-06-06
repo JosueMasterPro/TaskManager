@@ -62,6 +62,24 @@ function TareasNotas( { tipo, recarga }) {
     setNotaActiva(null);
   };
 
+  //Comprobar fecha para colores de las notas
+  const getClassByFecha = (fechaFinal, completado) => {
+    if (completado) return ''; // No cambiar color si está completada
+
+    const hoy = new Date();
+    const final = new Date(fechaFinal);
+
+    hoy.setHours(0, 0, 0, 0);
+    final.setHours(0, 0, 0, 0);
+
+    const diferenciaEnMs = final - hoy;
+    const dias = Math.ceil(diferenciaEnMs / (1000 * 60 * 60 * 24));
+
+    if (dias < 1) return 'rojo';
+    if (dias <= 4) return 'amarillo';
+    return '';
+  };
+
   return (
     <div style={{ padding: '1rem' }}>
       {user.rol === "admin"? 
@@ -79,7 +97,7 @@ function TareasNotas( { tipo, recarga }) {
         {tareasFiltradas.map((tarea) => (
           <div
             key={tarea.id_Tarea}
-            className="card"
+            className={`card ${getClassByFecha(tarea.fecha_final, tarea.completada)}`}
             onClick={() => abrirModal(tarea)}
           >
             {user.rol==="admin" && <p>{tarea.usuario}</p>}
