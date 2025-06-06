@@ -18,7 +18,7 @@ Este es el frontend de la aplicación **TaskManager**, desarrollado con React y 
 ```bash
 git clone https://github.com/JosueMasterPro/TaskManager.git
 cd TaskManager
-
+```
 ## Instala Dependencias
 npm install
 
@@ -29,7 +29,13 @@ npm run dev o npm start
 
 ## 📦 Generar versión de producción
 npm run build
-se generara una carpeta build, esa la puedes subir al host de tu preferencia
-si el host permite enlace con github. sigue los pasos del host para subir el host.
 
-## NO olvides cambiar las URLS de cada uno del fetch, por los urls del host
+## 🚀 Despliegue
+Sube el contenido de la carpeta dist/ a tu hosting preferido (Netlify, Vercel, cPanel, etc.).
+
+Si tu hosting tiene integración con GitHub, puedes configurar deploy automático.
+
+Importante: Cambia las URLs de las llamadas API (fetch o axios) para que apunten al backend en producción (no a localhost).
+
+
+```
