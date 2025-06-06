@@ -6,15 +6,19 @@ import Sidebar from '../components/SideBar';
 import Tareas from '../components/Tareas';
 import Recordatorios from '../components/Recordatorios';
 import TareaModalCreate from '../components/CreateTaskModal.jsx';
+import UsuariosCrud from '../components/UsuariosCrud.jsx';
 
 import { useAuth } from '../Context/authContext';
 
 function Main() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [selectedView, setSelectedView] = useState('Tarea');
   const [notaActiva, setNotaActiva] = useState(null);
+
   const [reloadTareas, setReloadTareas] = useState(false);
   const [reloadRecordatorio, setRecordatorio] = useState(false);
+  const [reloadUsuario, setReloadUsuarios] = useState(false);
+
   const { user, logout } = useAuth();
   const [tareaBlanco,settaraBlanco] = useState(null);
   const handleLogout = () => {
@@ -53,6 +57,7 @@ function Main() {
     <div className="layout">
       <Navbar collapsed={collapsed} toggle={() => setCollapsed(!collapsed)} />
       <div className="content-body">
+        
         <Sidebar 
             collapsed={collapsed}
             onSelect={setSelectedView}
@@ -62,6 +67,7 @@ function Main() {
           {/* Mostrar componente según la selección */}
           {selectedView === 'Tarea' && <Tareas tipo="tarea" recarga={reloadTareas} />}
           {selectedView === 'Recordatorio' && <Recordatorios tipo="recordatorio" recarga={reloadRecordatorio} />}
+          {selectedView === 'usuario' && <UsuariosCrud tipo="usuario" recarga={reloadUsuario} />}
             {/* Botón flotante según rol y vista */}
             {(
               (selectedView === 'Tarea' && user?.rol === 'admin') ||
@@ -83,6 +89,7 @@ function Main() {
             cerrarModal();
             setReloadTareas(prev => !prev);
             setRecordatorio(prev => !prev);
+            setReloadUsuarios(prev => !prev);
           }}
         />
       )}

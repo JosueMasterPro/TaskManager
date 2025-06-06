@@ -8,6 +8,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
   const [error, setError] = useState('');
 
   const [Usuarios,setUsuarios] = useState([]);
+
   //crear tarea
   const handleCreate = async () => {
     setErr(""); // limpiar errores previos
@@ -48,6 +49,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
       setErr(error.message);
     }
   };
+  
 //llenar select con usuarios
   const fetchUsuarios = useCallback(async () => {
     
@@ -79,7 +81,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
   }, [tarea,fetchUsuarios,rol]);
 
   return (
-    <div className="modalOverlay" onClick={onClose}>
+    <div className="modalOverlay">
     <div className="modalContent" onClick={(e) => e.stopPropagation()}>
         <h3>Crear {tipo}</h3>
     <input

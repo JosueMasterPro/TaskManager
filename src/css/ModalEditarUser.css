@@ -1,0 +1,171 @@
+/* Fondo del modal (oscurece la pantalla) */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Contenido del modal */
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Título del modal */
+.modalContent h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Botón para cerrar o eliminar (ícono) */
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Formulario del modal */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5;
+}
+
+.modal-form label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+
+.modal-form input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-form select {
+  height: 50px;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Botones de acción (Guardar, Cancelar) */
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-buttons .cancel {
+  background-color: #ccc;
+}
+
+/* Confirmación de eliminación */
+.confirmOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmBox {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.confirmBox p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Botones de confirmación */
+.button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.editButton {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 1rem;
+  }
+
+  .modal-form input {
+    font-size: 0.95rem;
+  }
+
+  .modal-buttons button,
+  .button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .closeButton {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}

@@ -1,7 +1,10 @@
 
-import { FaTasks, FaBell, FaSignOutAlt } from 'react-icons/fa';
+import { FaTasks, FaBell, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { useAuth } from '../Context/authContext';
+import "../css/SideBar.css"
 
 function Sidebar({ collapsed, onSelect, selected, logout }) {
+  const { user } = useAuth();
   return (
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <nav>
@@ -20,6 +23,15 @@ function Sidebar({ collapsed, onSelect, selected, logout }) {
             <FaBell className="sidebar-icon" />
             {!collapsed && <span className="sidebar-text">Recordatorios</span>}
           </li>
+          {user.rol === "admin" && 
+            <li
+              className={selected === 'usuario' ? 'active' : ''}
+              onClick={() => onSelect('usuario')}
+            >
+              <FaUser size={24} className="sidebar-icon" />
+              {!collapsed && <span className="sidebar-text">Usuarios</span>}
+            </li>
+          }
         </ul>
       </nav>
 
