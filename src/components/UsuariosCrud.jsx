@@ -58,8 +58,8 @@ function UsuarioCrud( {recarga}) {
 
     const filtrados = Usuarios.filter((u) => {
       const coincideTexto =
-        (u.usuario?.toLowerCase() || '').startsWith(valor) ||
-        (u.nombre?.toLowerCase() || '').startsWith(valor);
+        (u.usuario?.toLowerCase() || '').includes(valor) ||
+        (u.nombre?.toLowerCase() || '').includes(valor);
       const coincideRol = rolFiltro === '' || u.rol === rolFiltro;
       return coincideTexto && coincideRol;
     });
@@ -82,7 +82,7 @@ function UsuarioCrud( {recarga}) {
       <div className="filtros-contenedor">
         <input
           type="text"
-          placeholder="Filtrar por usuario, nombre, correo..."
+          placeholder="Filtrar por usuario"
           name='Filtro'
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
