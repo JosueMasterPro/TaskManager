@@ -79,7 +79,7 @@ function Login() {
       setTimeout(() => {
         setMensaje('');
         setActive('login');
-      }, 1500);
+      }, 1000);
 
     } catch (err) {
       setError(err.message || 'Error de conexión');
