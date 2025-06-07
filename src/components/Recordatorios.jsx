@@ -87,7 +87,7 @@ function Recordatorio( { tipo, recarga }) {
         {RecordatorioFiltrado.map((recordatorio) => (
           <div
             key={recordatorio.id_Tarea}
-            className={`card ${getClassByFecha(tarea.fecha_final, tarea.completada)}`}
+            className={`card ${getClassByFecha(recordatorio.fecha_final, recordatorio.completada)}`}
             onClick={() => abrirModal(recordatorio)}
           >
             {user.rol==="admin" && <p>{recordatorio.usuario}</p>}
