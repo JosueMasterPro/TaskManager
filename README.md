@@ -34,14 +34,15 @@ cd TaskManager
 npm install
 ```
 ## 🏃‍♂️ Ejecutar en modo desarrollo
-```
+```sh
 npm run dev o npm start
-```bash
-
-## Esto abrira un enlace en localhost:3000
+```
+- Esto abrira un enlace en localhost:3000
 
 ## 📦 Generar versión de producción
+```sh
 npm run build
+```
 
 ## 🚀 Despliegue
 - Sube el contenido de la carpeta dist/ a tu hosting preferido (Netlify, Vercel, cPanel, etc.).
