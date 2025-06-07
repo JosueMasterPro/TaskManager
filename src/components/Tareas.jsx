@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import TareaModal from '../components/TareaModal.jsx';
 import { useAuth } from '../Context/authContext.js';
+import { HiArrowRight, HiArrowLeft } from 'react-icons/hi'; // HeroIcons
 
 import '../css/C_tareas.css';
 
@@ -84,7 +85,7 @@ function TareasNotas( { tipo, recarga }) {
     <div style={{ padding: '1rem' }}>
       {user.rol === "admin"? 
         <h2 onClick={()=>{setVerTodas(prev => !prev)}} className='titulo-hover'><p>
-          {verTodas ? 'Todas las notas' : 'Mis Notas'}
+          {verTodas ? <> Todas las notas <HiArrowLeft size={24}/>  </> : <> Mis Notas <HiArrowRight size={24}/> </>}
           </p></h2> 
         : 
         <h2 style={{ textAlign: 'center' }}>Mis Notas</h2>}
