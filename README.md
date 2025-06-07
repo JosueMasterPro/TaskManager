@@ -15,15 +15,22 @@ Este es el frontend de la aplicación **TaskManager**, desarrollado con React y 
 
 1. Clona el repositorio:
 
-
+``` sh
 git clone https://github.com/JosueMasterPro/TaskManager.git
+```
 cd TaskManager
 
-## Instala Dependencias
-npm install
+## Dependencias
 
+
+## Instala Dependencias
+```sh
+npm install
+```
 ## 🏃‍♂️ Ejecutar en modo desarrollo
+```
 npm run dev o npm start
+```bash
 
 ## Esto abrira un enlace en localhost:3000
 
@@ -31,10 +38,6 @@ npm run dev o npm start
 npm run build
 
 ## 🚀 Despliegue
-Sube el contenido de la carpeta dist/ a tu hosting preferido (Netlify, Vercel, cPanel, etc.).
-
-Si tu hosting tiene integración con GitHub, puedes configurar deploy automático.
-
-Importante: Cambia las URLs de las llamadas API (fetch o axios) para que apunten al backend en producción (no a localhost).
-
-```bash
+- Sube el contenido de la carpeta dist/ a tu hosting preferido (Netlify, Vercel, cPanel, etc.).
+- Si tu hosting tiene integración con GitHub, puedes configurar deploy automático.
+- Importante: Cambia las URLs de las llamadas API (fetch o axios) para que apunten al backend en producción (no a localhost).
