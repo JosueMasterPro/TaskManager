@@ -8,7 +8,7 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
   const [editTarea, setEditTarea] = useState({ ...tarea });
   const [showConfirm, setShowConfirm] = useState(false);
   
-  const user = useAuth();
+  const { user } = useAuth();
   //guardar el editar una tarea
   const handleGuardar = async () => {
     try {
@@ -44,7 +44,6 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
       alert(err.message);
     }
   };
-
   return (
     <div className="modal__Overlay" onClick={onClose}>
       <div className="modal__Content" onClick={(e) => e.stopPropagation()}>
@@ -53,6 +52,7 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
             type="text"
             className="modal__input"
             value={editTarea.titulo}
+            disabled={user.rol === "admin" || editTarea.tipo==="recordatorio"? false : true}
             onChange={(e) => setEditTarea({ ...editTarea, titulo: e.target.value })}
           />
           {/* Botón para borrar */}
@@ -67,6 +67,7 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
         <textarea
           className="modal__textarea"
           value={editTarea.descripcion}
+          disabled={user.rol === "admin" || editTarea.tipo==="recordatorio"? false : true}
           onChange={(e) => {
             const value = e.target.value;
             if (value.length <= 65000) {
@@ -88,7 +89,9 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
             Fecha límite:
             <input
               type="date"
+              style={{marginLeft:"10px", textAlign:"center"}}
               value={editTarea.fecha_final || ''}
+              disabled={user.rol === "admin" || editTarea.tipo==="recordatorio"? false : true}
               onChange={(e) => setEditTarea({ ...editTarea, fecha_final: e.target.value })}
             />
           </label>

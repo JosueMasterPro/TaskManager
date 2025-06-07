@@ -10,12 +10,43 @@ function TareasNotas( {tipo, recarga } ) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [notaActiva, setNotaActiva] = useState(null);
-  
+
+  const [Usuarios,setUsuarios] = useState([]);
+  const [filtro, setFiltro] = useState("");
   const { user } = useAuth()
 
   //variable filtrar
   const [verTodas, setVerTodas] = useState(false);
   const [tareasFiltradas, setTareasFiltradas] = useState([]);
+
+    //Traer Usuarios
+  const fetchUsuarios = useCallback(async () => {
+    try {
+        const response = await fetch('https://personaltaskphp.up.railway.app/api/usuarios', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setLoading(true);
+        if (!response.ok) {
+          const errorData = await response.json();
+          setError(errorData.message || 'Error al obtener usuarios');
+        }
+
+        const data = await response.json();
+        setUsuarios(data);
+        setLoading(false);
+      } catch (error) {
+        setError('Error al obtener usuarios:', error);
+        throw error;
+      }
+  },[]);
+
+  useEffect(() => {
+        fetchUsuarios();
+  }, [fetchUsuarios]);
+
 
   const fetchTareas = useCallback( async () => {
     setError('');
@@ -40,7 +71,8 @@ function TareasNotas( {tipo, recarga } ) {
     } finally {
       setLoading(false);
     }
-  },[user.id, user.rol, tipo]);
+  },[tipo,user.id,user.rol]);
+
   //recargar tareas
   useEffect(() => {
       fetchTareas();
@@ -48,12 +80,17 @@ function TareasNotas( {tipo, recarga } ) {
     
     //fitlrar
     useEffect(() => {
-    if (verTodas) {
-      setTareasFiltradas(tareas); // 0 filtro
-    } else {
-        setTareasFiltradas(tareas.filter(t => t.id_usuario === user.id));
-    }
-  }, [tareas, user.id, verTodas]);
+      if (verTodas) {
+        if(filtro === ""){
+          setTareasFiltradas(tareas);
+        }else{
+          setTareasFiltradas(tareas.filter(t => String(t.id_usuario) === filtro));
+        }
+        
+      } else {
+          setTareasFiltradas(tareas.filter(t => t.id_usuario === user.id));
+      }
+    }, [tareas, user.id, verTodas, filtro]);
 
 
   const abrirModal = (tarea) => {
@@ -85,12 +122,37 @@ function TareasNotas( {tipo, recarga } ) {
   return (
     <div style={{ padding: '1rem' }}>
       {user.rol === "admin"? 
-        <h2 onClick={()=>{setVerTodas(prev => !prev)}} className='titulo-hover'><p>
-          {verTodas ? <> Todas las notas <HiArrowLeft size={24}/>  </> : <> Mis Notas <HiArrowRight size={24}/> </>}
-          </p></h2> 
+        <h2 onClick={()=>{setVerTodas(prev => !prev)}} className='titulo-hover'>
+          <>
+            {verTodas ? <>
+                <>Todas las notas <HiArrowLeft size={24}/></> 
+            </> 
+            : 
+            <> Mis Notas <HiArrowRight size={24}/> </>}
+          </>
+        </h2> 
         : 
-        <h2 style={{ textAlign: 'center' }}>Mis Notas</h2>}
+        <h2 style={{ textAlign: 'center' }}>Mis Notas</h2>
+      }
 
+      {verTodas ? 
+      <div className="filtros-contenedor">
+        <select
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+          className="filtro-select estilizado"
+        >
+          <option value={""}>Todos los roles</option>
+            {Usuarios.map((user)=>(
+              <option key={user.id} value={user.id}>{user.usuario}</option>
+            ))}
+        </select>
+      </div>
+      : 
+      <></>
+      }
+
+                       
       {loading && <p>Cargando tareas...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!loading && tareas.length === 0 && <p>No hay notas para mostrar</p>}
