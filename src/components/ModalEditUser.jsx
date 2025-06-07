@@ -7,7 +7,7 @@ const ModalEditUser = ({ usuario, onClose, onSave }) => {
     const [editUser, seteditUser] = useState({ ...usuario });
     const [showConfirm, setShowConfirm] = useState(false);
     const [err, seterr] = useState(false);
-
+    //guardar cambios 
     const handleGuardar = async (e) => {
         e.preventDefault();
      try {
@@ -26,7 +26,7 @@ const ModalEditUser = ({ usuario, onClose, onSave }) => {
         alert(err.message);
         }
     };
-
+    //desactivar el usuario
     const handleEliminar = async (e) => {
       e.preventDefault();
       if(editUser.activo === 0){

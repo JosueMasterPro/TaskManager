@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
 
+import { useAuth } from '../Context/authContext';
+
+import "../css/C_tareas.css"
 const TareaModal = ({ tarea, onClose, onSave }) => {
   const [editTarea, setEditTarea] = useState({ ...tarea });
   const [showConfirm, setShowConfirm] = useState(false);
-
+  
+  const user = useAuth();
+  //guardar el editar una tarea
   const handleGuardar = async () => {
     try {
       const res = await fetch(
@@ -22,7 +27,7 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
       alert(err.message);
     }
   };
-
+  //Borrar una tarea
   const handleEliminar = async () => {
     try {
       const res = await fetch(
@@ -41,22 +46,26 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
   };
 
   return (
-    <div className="modalOverlay" onClick={onClose}>
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        {/* Botón para abrir confirmación */}
-        <button onClick={() => setShowConfirm(true)} className="closeButton" aria-label="Borrar">
-          <MdDelete size={40} color="red" />
-        </button>
-
-        <input
-          type="text"
-          className="modal-input"
-          value={editTarea.titulo}
-          onChange={(e) => setEditTarea({ ...editTarea, titulo: e.target.value })}
-        />
-
+    <div className="modal__Overlay" onClick={onClose}>
+      <div className="modal__Content" onClick={(e) => e.stopPropagation()}>
+        <div className="input__with__button">
+          <input
+            type="text"
+            className="modal__input"
+            value={editTarea.titulo}
+            onChange={(e) => setEditTarea({ ...editTarea, titulo: e.target.value })}
+          />
+          {/* Botón para borrar */}
+            {user.rol === "admin" || editTarea.tipo === "recordatorio"?
+              <button onClick={() => setShowConfirm(true)} className="close__Button" aria-label="Borrar">
+                <MdDelete size={40} color="red" />
+              </button>
+              :
+              <></>
+            }
+        </div>
         <textarea
-          className="modal-textarea"
+          className="modal__textarea"
           value={editTarea.descripcion}
           onChange={(e) => {
             const value = e.target.value;
@@ -86,8 +95,8 @@ const TareaModal = ({ tarea, onClose, onSave }) => {
         </div>
 
         <div style={{ display: 'flex', gap: '12px' }}>
-          <button className="button editButton" onClick={handleGuardar}>Guardar cambios</button>
-          <button className="button deleteButton" onClick={onClose}>Cancelar</button>
+          <button className="button__ edit__Button" onClick={handleGuardar}>Guardar cambios</button>
+          <button className="button__ delete__Button" onClick={onClose}>Cancelar</button>
         </div>
 
         {/* Confirmación modal */}

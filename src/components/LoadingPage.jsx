@@ -1,7 +1,7 @@
-import React from 'react'
 import "../css/loadingPage.css";
 
 function LoadingPage() {
+  //pagina de cargando entre el login y main
   return (
     <div className="loadContainer">
         <div className="ring"></div>

@@ -13,7 +13,7 @@ function Recordatorio( { tipo, recarga }) {
 
   //variable filtrar para admins
   const [RecordatorioFiltrado, setRecordatorioFiltrado] = useState([]);
-
+    //obtener las tareas tipo recordatorio
   const fetchTareas = useCallback(async () => {
     setError('');
     setLoading(true);
@@ -38,7 +38,7 @@ function Recordatorio( { tipo, recarga }) {
       setLoading(false);
     }
   }, [user.id, user.rol, tipo]);
-  
+  //recargar los recordatorios
   useEffect(() => {
     fetchTareas();
   }, [recarga,fetchTareas]);
@@ -59,7 +59,7 @@ function Recordatorio( { tipo, recarga }) {
 
   //Comprobar fecha para colores de las notas
   const getClassByFecha = (fechaFinal, completado) => {
-    if (completado) return ''; // No cambiar color si está completada
+    if (completado) return ''; // No cambiar color si está completa
 
     const hoy = new Date();
     const final = new Date(fechaFinal);

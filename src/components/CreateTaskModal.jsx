@@ -11,8 +11,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
 
   //crear tarea
   const handleCreate = async () => {
-    setErr(""); // limpiar errores previos
-    // Validaciones
+    setErr("");
     // Validación de campos vacíos
     if (!editTarea.titulo || !editTarea.descripcion || (rol === "admin" && !editTarea.id_usuario) || !editTarea.fecha_final) {
       setErr("Debe llenar el título, la descripción y la fecha final");
@@ -52,7 +51,6 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
   
 //llenar select con usuarios
   const fetchUsuarios = useCallback(async () => {
-    
     try {
         const response = await fetch('https://personaltaskphp.up.railway.app/api/usuarios', {
           method: 'GET',
@@ -73,7 +71,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
         throw error;
       }
   },[]);
-
+  //recarga los usuarios
   useEffect(() => {
     if(rol==="admin"){
         fetchUsuarios();
@@ -81,12 +79,12 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
   }, [tarea,fetchUsuarios,rol]);
 
   return (
-    <div className="modalOverlay">
-    <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+    <div className="modal__Overlay">
+    <div className="modal__Content" onClick={(e) => e.stopPropagation()}>
         <h3>Crear {tipo}</h3>
     <input
         type="text"
-        className="modal-input"
+        className="modal__input"
         value={editTarea.titulo}
         onChange={(e) => setEditTarea({ ...editTarea, titulo: e.target.value })}
         placeholder="Título"
@@ -95,7 +93,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
     {rol === "admin" && 
         <select
             type="text"
-            className="modal-select"
+            className="modal__select"
             value={editTarea.id_usuario}
             onChange={(e) => setEditTarea({ ...editTarea, id_usuario: e.target.value })}
             placeholder="Usuario"
@@ -107,7 +105,7 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
         </select>
     }
     <textarea
-        className="modal-textarea"
+        className="modal__textarea"
         value={editTarea.descripcion}
         onChange={(e) => {
         const value = e.target.value;
@@ -142,10 +140,10 @@ const TareaModal = ({ tarea, onClose, onSave, tipo, rol }) => {
         </label>
     </div>
     <div style={{ display: 'flex', gap: '12px' }}>
-        <button className="button editButton" onClick={handleCreate}>
+        <button className="button__ edit__Button" onClick={handleCreate}>
         Crear {tipo}
         </button>
-        <button className="button deleteButton" onClick={onClose}>
+        <button className="button__ delete__Button" onClick={onClose}>
         Cancelar
         </button>
     </div>

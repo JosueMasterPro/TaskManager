@@ -4,7 +4,7 @@ import ModalEditUser from '../components/ModalEditUser.jsx';
 
 import '../css/TablaUsuarios.css';
 
-function UsuarioCrud( {recarga}) {
+function UsuarioCrud() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [notaActiva, setNotaActiva] = useState(null);

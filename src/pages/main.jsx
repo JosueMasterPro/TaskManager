@@ -26,7 +26,7 @@ function Main() {
   };
 
   useEffect(() => {
-      // Si la pantalla es menor o igual a 768px (móvil), que esté colapsado
+      // Si la pantalla es menor o igual a 768px (telefono), que esté colapsado
       if (window.innerWidth <= 768) {
         setCollapsed(true);
       } else {
@@ -41,7 +41,8 @@ function Main() {
   const cerrarModal = () => {
     setNotaActiva(null);
   };
-
+  //iniciar tarea en blanco para el envio
+  //se edita cada que se cambia de vista que se envia el tipo y el usuario
   useEffect(()=>{
     settaraBlanco({
       id_usuario: user.id,
@@ -65,7 +66,7 @@ function Main() {
             logout={handleLogout}/>
         <main className="content">
           {/* Mostrar componente según la selección */}
-          {selectedView === 'Tarea' && <Tareas tipo="tarea" recarga={reloadTareas} />}
+          {selectedView === 'Tarea' && <Tareas tipo="tarea" recarga={reloadTareas}/>}
           {selectedView === 'Recordatorio' && <Recordatorios tipo="recordatorio" recarga={reloadRecordatorio} />}
           {selectedView === 'usuario' && <UsuariosCrud tipo="usuario" recarga={reloadUsuario} />}
             {/* Botón flotante según rol y vista */}

@@ -54,11 +54,11 @@ function Login() {
     setMensaje('');
 
     const validationErrors = validateSignUp(userLogin);
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-
     try {
       const response = await fetch('https://personaltaskphp.up.railway.app/api/signUp', {
         method: 'POST',
@@ -71,7 +71,8 @@ function Login() {
       if (!response.ok) {
         throw new Error(data.message || 'Error al crear usuario');
       }
-
+      e.target.reset();  //<- vacia los inputs
+      setShowPassword(false);
       setMensaje('¡Usuario creado con éxito!');
       setUserLogin({ usuario: '', name: '', secondName: '', email: '', password: '' });
 
@@ -86,13 +87,11 @@ function Login() {
     } finally {
     }
   };
-
+  //iniciar sesion
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
     setError('');
-
     try {
-
       await login(userSignup);
 
     }  catch (err) {

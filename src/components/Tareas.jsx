@@ -5,11 +5,12 @@ import { HiArrowRight, HiArrowLeft } from 'react-icons/hi'; // HeroIcons
 
 import '../css/C_tareas.css';
 
-function TareasNotas( { tipo, recarga }) {
+function TareasNotas( {tipo, recarga } ) {
   const [tareas, setTareas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [notaActiva, setNotaActiva] = useState(null);
+  
   const { user } = useAuth()
 
   //variable filtrar
