@@ -47,4 +47,4 @@ npm run build
 ## 🚀 Despliegue
 - Sube el contenido de la carpeta dist/ a tu hosting preferido (Netlify, Vercel, cPanel, etc.).
 - Si tu hosting tiene integración con GitHub, puedes configurar deploy automático.
-- Importante: Cambia las URLs de las llamadas API (fetch o axios) para que apunten al backend en producción (no a localhost).
+- Importante: Cambia las URLs de las llamadas API (fetch o axios) para que apunten al backend en producción o bien a tu api desplgada localmente
